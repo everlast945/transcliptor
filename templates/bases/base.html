@@ -1,0 +1,18 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>TC {% block title %}{% endblock %}</title>
+        {% include 'bases/_include/_css.html' %}
+        {% block css %}{% endblock %}
+    </head>
+    <body>
+        {% block header %}{% endblock %}
+        {% block content %}{% endblock %}
+        {% block footer %}{% endblock %}
+        {% include 'bases/_include/_js.html' %}
+        {% block js %}{% endblock %}
+    </body>
+</html>
