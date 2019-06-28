@@ -1,0 +1,62 @@
+{% extends 'bases/base.html' %}
+
+{% block title %}
+    Вход
+{% endblock %}
+
+{% block content %}
+    <div class="loginform">
+        <div class="loginform__inner">
+            <div class="loginform__header">
+                <span>Авторизация</span>
+            </div>
+            <form class="js-form_disable" method="post" novalidate>
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next_url }}">
+                <div class="loginform__fields">
+
+{#                    {% include '_form_errors.html' with errors=form.non_field_errors only %}#}
+
+                    {% for field in form %}
+                        <div class="loginform__field input {% if field.errors %} input_error{% endif %}">
+                            {% if field.field.widget.input_type == 'checkbox' %}
+                                <div class="form-group inline_label {% if field.errors %} has-error {% endif %}">
+                                    <label for="{{ field.id_for_label }}">
+                                        {{ field }}
+                                        {{ field.label }}
+                                    </label>
+                                </div>
+                            {% else %}
+
+                                <div class="input__label">
+                                    {{ field.label_tag }}
+                                </div>
+                                {{ field }}
+                            {% endif %}
+
+                            {% for error in field.errors %}
+                                <div class="input__error">
+                                    <span>{{ error }}</span>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+                    {% endfor %}
+
+                    <div class="text-center">
+{#                        <a href="{% url 'password_reset' %}">Восстановить пароль</a>#}
+                    </div>
+
+                </div>
+
+
+                <div class="row loginform__buttons">
+                    <input type="submit" name="login" class="btn btn-primary" value="Войти">
+{#                    <a href="{% url 'social:begin' 'esia' %}" class="btn btn-outline">Войти через ЕСИА</a>#}
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
