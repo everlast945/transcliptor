@@ -17,8 +17,11 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 
+from users.views import UserLoginView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r'^/', UserLoginView.as_view(), name='transcliptor'),
+    url(r'^login/', UserLoginView.as_view(), name='login'),
     url(r'^users/', include('users.urls')),
 ]
