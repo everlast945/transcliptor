@@ -1,3 +1,4 @@
+from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 
 from users.models import User
@@ -19,10 +20,12 @@ class UserAuthenticationForm(AuthenticationForm):
     def clean(self):
         username = self.cleaned_data.get('username')
         password = self.cleaned_data.get('password')
-        # todo: Убрать проверку пользователя
+        # todo: Нужно будет убрать создание пользователя
         if username is not None and password:
             if not User.objects.filter(username=username).exists():
-                User.objects.create(username=username, password=password)
+                user = User.objects.create(username=username, password=password)
+                user.set_password(password)
+                user.save()
 
             self.user_cache = authenticate(self.request, username=username, password=password)
             if self.user_cache is None:

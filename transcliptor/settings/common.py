@@ -35,7 +35,8 @@ INSTALLED_APPS = [
 
     'django.contrib.admin',
 
-    'users'
+    'users',
+    'notes',
 ]
 
 MIDDLEWARE = [
@@ -94,6 +95,9 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
+LOGIN_REDIRECT_URL = '/'
 
 
 # Internationalization
