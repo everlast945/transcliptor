@@ -1,0 +1,30 @@
+:root {
+    --style-color-1: #e1f5fe;
+    --style-color-2: #b3e5fc;
+    --style-color-3: #81d4fa;
+    --style-color-4: #4fc3f7;
+}
+
+
+html, body {
+    height: 100%;
+    padding-top: 27px;
+}
+
+.header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #0f6674;
+}
+
+.content {
+    height: 100vh;
+    overflow: auto;
+}
