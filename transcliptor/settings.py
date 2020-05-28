@@ -18,7 +18,7 @@ env = environ.Env(DEBUG=(bool, False), )
 ROOT_DIR = environ.Path(__file__) - 3
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-environ.Env.read_env(os.path.join(BASE_DIR, '.env_local'))
+environ.Env.read_env()
 
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env.bool('DEBUG', False)
@@ -48,6 +48,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'transcliptor.urls'
+
+DATABASES = {
+    'default': env.db()
+}
 
 TEMPLATES = [
     {
@@ -95,27 +99,32 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 LANGUAGE_CODE = 'ru-RU'
-
 TIME_ZONE = 'Europe/Moscow'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
 STATIC_ROOT = str(ROOT_DIR('staticfiles'))
-
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = '/assets/'
 
 # See:
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = (str(ROOT_DIR.path('assets')),)
+
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#         'LOCATION': '127.0.0.1:11211',
+#     },
+#     'TIMEOUT': 60,
+#     'OPTIONS': {
+#         'MAX_ENTRIES': 1000,
+#         'SERVER_MAX_VALUE_LENGTH': 1024 * 1024 * 2,  # 2 mb
+#     },
+# }
