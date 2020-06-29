@@ -15,7 +15,7 @@ import environ
 
 env = environ.Env(DEBUG=(bool, False), )
 
-ROOT_DIR = environ.Path(__file__) - 3
+ROOT_DIR = environ.Path(__file__) - 2
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 environ.Env.read_env()
@@ -80,6 +80,7 @@ STATICFILES_FINDERS = (
 WSGI_APPLICATION = 'transcliptor.wsgi.application'
 
 AUTH_USER_MODEL = 'users.User'
+LOGIN_REDIRECT_URL = '/'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -115,16 +116,17 @@ STATIC_URL = '/assets/'
 
 # See:
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
-STATICFILES_DIRS = (str(ROOT_DIR.path('assets')),)
+STATICFILES_DIRS = (str(ROOT_DIR.path('assets/')),)
+print(STATICFILES_DIRS)
 
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-#         'LOCATION': '127.0.0.1:11211',
-#     },
-#     'TIMEOUT': 60,
-#     'OPTIONS': {
-#         'MAX_ENTRIES': 1000,
-#         'SERVER_MAX_VALUE_LENGTH': 1024 * 1024 * 2,  # 2 mb
-#     },
-# }
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    },
+    'TIMEOUT': 5,
+    'OPTIONS': {
+        'MAX_ENTRIES': 1000,
+        'SERVER_MAX_VALUE_LENGTH': 1024 * 1024 * 2,  # 2 mb
+    },
+}
